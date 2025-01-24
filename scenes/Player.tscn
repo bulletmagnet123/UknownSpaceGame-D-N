@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_degxr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hikh"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_5hikh")
+
+[node name="Game" type="Node2D" parent="."]
