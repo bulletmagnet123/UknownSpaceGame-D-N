@@ -75,9 +75,6 @@ public partial class Player : CharacterBody2D
 			moveRight();
 		}
 
-
-
-
-
 	}
+	[Export] private Node Type;
 }

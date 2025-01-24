@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://co1sv4pamwka1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_degxr"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="Player.cs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5hikh"]
 radius = 5.0
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_54n8a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
