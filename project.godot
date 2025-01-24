@@ -15,5 +15,5 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
-
+## comment test
 project/assembly_name="BulletmagnetAndIzendaleGameProject"
