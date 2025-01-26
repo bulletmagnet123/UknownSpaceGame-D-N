@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d23r8sjg4pkd4"]
+
+[sub_resource type="Environment" id="Environment_7ryyv"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ggoqs"]
+
+[sub_resource type="Compositor" id="Compositor_ch3bg"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+physics_interpolation_mode = 2
+environment = SubResource("Environment_7ryyv")
+camera_attributes = SubResource("CameraAttributesPhysical_ggoqs")
+compositor = SubResource("Compositor_ch3bg")

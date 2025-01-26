@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cbdeqeiiwjgf2"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+physics_interpolation_mode = 2
