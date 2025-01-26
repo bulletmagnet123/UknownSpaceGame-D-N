@@ -11,3 +11,4 @@
 [node name="Player" parent="." instance=ExtResource("2_rm24y")]
 
 [node name="Asteroid" parent="." instance=ExtResource("3_jvhca")]
+position = Vector2(372, -132)
