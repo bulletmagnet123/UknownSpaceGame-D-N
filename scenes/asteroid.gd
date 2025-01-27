@@ -4,8 +4,7 @@ var movement_vector := Vector2()
 func _on_asteroid_collided(position: Vector2, size: int) -> void:
 	print("Asteroid collided at position: ", position, " with size: ", size)
 signal asteroid_collided
-
-
+var Health = 100
 
 
 var rotation_speed: = randf_range(-1, 1) * PI / 2
@@ -16,7 +15,7 @@ var speed: = randf_range(50, 100)
 enum AsteroidSize{LARGE, MEDIUM, SMALL}
 @export var asteroidSize := AsteroidSize
 
-func SpawnAsteroids(size: int, position: Vector2) -> void:
+func SpawnAsteroids(size: int, position: Vector2):
 	var asteroid = preload("res://scenes/asteroid.tscn").instantiate()
 	asteroid.size = size
 	asteroid.position = position
@@ -49,3 +48,13 @@ func _ready():
 func _physics_process(delta):
 	global_position += movement_vector * speed * delta
 	rotation += rotation_speed * delta
+
+
+func _on_collider_body_entered(body: Node2D) -> void:
+	SpawnAsteroids(asteroidSize, global_position)
+	pass # Replace with function body.
+
+func _process(delta: float) -> void:
+	if Health <= 0:
+		queue_free()
+		return

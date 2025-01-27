@@ -75,3 +75,5 @@ frame_progress = 0.270421
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n8ula")
+
+[node name="Collider" type="Area2D" parent="."]

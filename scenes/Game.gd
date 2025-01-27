@@ -1,30 +1,30 @@
-extends Node
+extends Node2D
+
 var asteroid_scene = preload("res://scenes/asteroid.tscn")
+var Health = 100
 
 enum AsteroidSize { SMALL, MEDIUM, LARGE }
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	spawn_initial_asteroids()
+func _ready() -> void:	
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	pass # Replace with function body.
+	if Health <= 0:
+		spawn_asteroid(global_position, AsteroidSize.SMALL)
+	if Input.is_action_just_pressed("ui_select"):  # Assuming "ui_select" is mapped to a key
+		Health = 0
+		return
+	pass
+	# Called every frame. Delta is the elapsed time since the previous frame.
 
-func spawn_asteroid(pos, size):
+func spawn_asteroid(pos: Vector2, size: int):
 	var a = asteroid_scene.instantiate()
 	a.global_position = pos
 	a.size = size
-	a.connect("asteroid_collided", Callable(self, "_on_asteroid_collided"))
 	add_child(a)
 
-func _on_player_collided():
-	
-	spawn_asteroid(Vector2(100, 100), AsteroidSize.SMALL)
-	pass
-
-func _on_asteroid_collided(pos, size):
+func _on_asteroid_collided(pos: Vector2, size: int):
 	# Spawn new asteroids based on the size of the collided asteroid
 	if size == AsteroidSize.LARGE:
 		spawn_asteroid(pos, AsteroidSize.MEDIUM)
@@ -32,8 +32,3 @@ func _on_asteroid_collided(pos, size):
 	elif size == AsteroidSize.MEDIUM:
 		spawn_asteroid(pos, AsteroidSize.SMALL)
 		spawn_asteroid(pos, AsteroidSize.SMALL)
-
-func spawn_initial_asteroids():
-	# Example function to spawn initial asteroids
-	spawn_asteroid(Vector2(100, 100), AsteroidSize.LARGE)
-	spawn_asteroid(Vector2(200, 200), AsteroidSize.MEDIUM)
