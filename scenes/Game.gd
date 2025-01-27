@@ -9,6 +9,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	pass # Replace with function body.
 
 func spawn_asteroid(pos, size):
@@ -17,6 +18,11 @@ func spawn_asteroid(pos, size):
 	a.size = size
 	a.connect("asteroid_collided", Callable(self, "_on_asteroid_collided"))
 	add_child(a)
+
+func _on_player_collided():
+	
+	spawn_asteroid(Vector2(100, 100), AsteroidSize.SMALL)
+	pass
 
 func _on_asteroid_collided(pos, size):
 	# Spawn new asteroids based on the size of the collided asteroid

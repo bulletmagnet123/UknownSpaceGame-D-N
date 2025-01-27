@@ -6,6 +6,8 @@ func _on_asteroid_collided(position: Vector2, size: int) -> void:
 signal asteroid_collided
 
 
+
+
 var rotation_speed: = randf_range(-1, 1) * PI / 2
 @export var size := AsteroidSize.LARGE
 
@@ -19,7 +21,6 @@ func SpawnAsteroids(size: int, position: Vector2) -> void:
 	asteroid.size = size
 	asteroid.position = position
 	get_parent().add_child(asteroid)
-	
 
 
 func _on_body_entered(body):
