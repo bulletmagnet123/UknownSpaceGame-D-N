@@ -3,8 +3,6 @@ extends CharacterBody2D
 @export var speed: float = 500
 @export var Health: int = 100
 
-@onready var laser: RayCast2D = $laser
-
 func _physics_process(delta):
 	var mouse_pos = get_global_mouse_position()
 	var direction := Vector2(

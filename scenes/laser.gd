@@ -4,32 +4,22 @@ var tween
 
 var beam_length = 1000
 const RAY_LENGTH = 1000
-
 var is_active: bool
 
 @onready var Laser: RayCast2D = $Laser
-
-var laser_color = Color(0.0235294, 1, 1, 1)
+@onready var Player: CharacterBody2D = get_tree().root.get_node("Player")  # Adjust the path to the player node
 
 func _ready() -> void:
 	tween = get_tree().create_tween()
-	is_active = true
 	var mousepos = get_local_mouse_position()
-	Laser.target_position = mousepos
-	Laser.modulate = laser_color
-	Laser.enabled = true
+	
 
 func _physics_process(delta: float) -> void:
-	if Laser:
+		Laser.global_position = get_global_mouse_position()
 		if Laser.is_colliding():
 			var collider = Laser.get_collider()
-			if collider.name == "Player":  # Assuming the player's node is named "Player"
-				print("Laser is colliding with the player")
-			else:
-				print("Laser is not colliding with anything")
-	else:
-		print("Laser is not initialized")
-
+			if collider.name != "Player":  # Ensure it's not colliding with the player
+				print("Laser collided with something")
 
 func activate() -> void:
 	tween.stop_all()
