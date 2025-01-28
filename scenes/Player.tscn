@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rcr6x86bm54j"]
+[gd_scene load_steps=6 format=3 uid="uid://rcr6x86bm54j"]
 
 [ext_resource type="Script" path="res://scenes/playerController.gd" id="1_s3i2x"]
 [ext_resource type="Texture2D" uid="uid://c75ppy4akomq2" path="res://assets/protoship.png" id="2_77hj3"]
+[ext_resource type="PackedScene" uid="uid://dfo8vsb5kb1kq" path="res://scenes/Laser.tscn" id="3_cdbg3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvuq3"]
 
@@ -10,6 +11,7 @@ radius = 80.0
 height = 220.0
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(-197, -31)
 script = ExtResource("1_s3i2x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -23,3 +25,6 @@ texture = ExtResource("2_77hj3")
 shape = SubResource("CapsuleShape2D_7qqas")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Laser" parent="." instance=ExtResource("3_cdbg3")]
+position = Vector2(-232, 13)

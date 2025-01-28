@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 @export var speed: float = 500
+@export var Health: int = 100
+
+@onready var laser: RayCast2D = $laser
 
 func _physics_process(delta):
 	var mouse_pos = get_global_mouse_position()
@@ -16,9 +19,14 @@ func _physics_process(delta):
 	rotation = angle
 	velocity = direction * speed
 	move_and_slide()
+	
+
 
 func _on_collision(body):
-	if body.name == "asteroid":
-		position.x = + 400
-		position.y = + 400
+	if body.name == "Asteroid":
+		Health -= 10
+		body.queue_free()
+		if Health <= 0:
+			queue_free()
+		pass
 		

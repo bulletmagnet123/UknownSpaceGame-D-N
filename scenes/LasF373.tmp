@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfo8vsb5kb1kq"]
+
+[ext_resource type="Script" path="res://scenes/laser.gd" id="1_2d36p"]
+[ext_resource type="Texture2D" uid="uid://b6vyd0w72ymq3" path="res://assets/glowing_circle.png" id="2_23ykg"]
+
+[node name="Laser" type="RayCast2D"]
+target_position = Vector2(1000, 0)
+script = ExtResource("1_2d36p")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 1000, 0)
+default_color = Color(0.5, 3, 6, 1)
+texture = ExtResource("2_23ykg")
+
+[node name="BeamParticles" type="CPUParticles2D" parent="."]
+emitting = false
+
+[node name="CastingParticles" type="CPUParticles2D" parent="."]
+emitting = false
