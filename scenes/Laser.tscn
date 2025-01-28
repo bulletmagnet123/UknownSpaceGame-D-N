@@ -1,13 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfo8vsb5kb1kq"]
+[gd_scene load_steps=2 format=3 uid="uid://8on4o3fc70r7"]
 
 [ext_resource type="Script" path="res://scenes/laser.gd" id="1_2d36p"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f8fpe"]
-
-[node name="Laser" type="RayCast2D"]
-modulate = Color(0.0235294, 1, 1, 1)
-material = SubResource("CanvasItemMaterial_f8fpe")
-position = Vector2(15, 30)
-target_position = Vector2(481, 0)
-collide_with_areas = true
+[node name="LaserNode" type="Node2D"]
 script = ExtResource("1_2d36p")
+
+[node name="Laser" type="RayCast2D" parent="."]
