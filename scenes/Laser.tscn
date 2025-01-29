@@ -1,8 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://8on4o3fc70r7"]
+[gd_scene load_steps=5 format=3 uid="uid://8on4o3fc70r7"]
 
 [ext_resource type="Script" path="res://scenes/laser.gd" id="1_2d36p"]
+[ext_resource type="Texture2D" uid="uid://b6vyd0w72ymq3" path="res://assets/glowing_circle.png" id="2_uxm03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqby6"]
+size = Vector2(179, 10)
+
+[sub_resource type="Environment" id="Environment_0x8s3"]
+resource_local_to_scene = true
+background_mode = 3
+background_color = Color(0.322686, 0.52718, 0.991591, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0, 0, 0.647059, 1)
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 0
 
 [node name="LaserNode" type="Node2D"]
 script = ExtResource("1_2d36p")
 
 [node name="Laser" type="RayCast2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0.710144, 0)
+scale = Vector2(0.971014, 1)
+points = PackedVector2Array(187, 0, 0, 0)
+default_color = Color(0, 0.537255, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D"]
+position = Vector2(89.5, 0)
+shape = SubResource("RectangleShape2D_fqby6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Line2D"]
+amount = 24
+local_coords = true
+texture = ExtResource("2_uxm03")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 73.86
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Line2D"]
+environment = SubResource("Environment_0x8s3")
