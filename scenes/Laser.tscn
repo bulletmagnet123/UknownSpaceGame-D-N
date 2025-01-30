@@ -3,8 +3,17 @@
 [ext_resource type="Script" path="res://scenes/laser.gd" id="1_2d36p"]
 [ext_resource type="Texture2D" uid="uid://b6vyd0w72ymq3" path="res://assets/glowing_circle.png" id="2_uxm03"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqby6"]
-size = Vector2(179, 10)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rqn2i"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(500, -1.5, 0)
+emission_shape = 3
+emission_box_extents = Vector3(500, 3, 1)
+spread = 60.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+scale_min = 0.2
+scale_max = 0.2
 
 [sub_resource type="Environment" id="Environment_0x8s3"]
 resource_local_to_scene = true
@@ -20,18 +29,16 @@ glow_blend_mode = 0
 script = ExtResource("1_2d36p")
 
 [node name="Laser" type="RayCast2D" parent="."]
+target_position = Vector2(1000, 0)
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(0.710144, 0)
 scale = Vector2(0.971014, 1)
-points = PackedVector2Array(187, 0, 0, 0)
+points = PackedVector2Array(1000, 0, 0, 0)
 default_color = Color(0, 0.537255, 1, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D"]
-position = Vector2(89.5, 0)
-shape = SubResource("RectangleShape2D_fqby6")
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Line2D"]
+visible = false
 amount = 24
 local_coords = true
 texture = ExtResource("2_uxm03")
@@ -43,6 +50,12 @@ initial_velocity_min = 1.0
 initial_velocity_max = 100.0
 scale_amount_min = 0.2
 scale_amount_max = 0.2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Line2D"]
+scale = Vector2(1, 1)
+process_material = SubResource("ParticleProcessMaterial_rqn2i")
+texture = ExtResource("2_uxm03")
+lifetime = 0.3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Line2D"]
 environment = SubResource("Environment_0x8s3")
