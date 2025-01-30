@@ -33,7 +33,6 @@ target_position = Vector2(1000, 0)
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(0.710144, 0)
-scale = Vector2(0.971014, 1)
 points = PackedVector2Array(1000, 0, 0, 0)
 default_color = Color(0, 0.537255, 1, 1)
 
@@ -52,7 +51,6 @@ scale_amount_min = 0.2
 scale_amount_max = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Line2D"]
-scale = Vector2(1, 1)
 process_material = SubResource("ParticleProcessMaterial_rqn2i")
 texture = ExtResource("2_uxm03")
 lifetime = 0.3
