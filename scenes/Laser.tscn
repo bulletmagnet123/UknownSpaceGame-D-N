@@ -33,7 +33,7 @@ target_position = Vector2(1000, 0)
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(0.710144, 0)
-points = PackedVector2Array(1000, 0, 0, 0)
+points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(0, 0.537255, 1, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Line2D"]
