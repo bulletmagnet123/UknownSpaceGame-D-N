@@ -27,14 +27,24 @@ func _physics_process(delta: float) -> void:
 		if not is_active:  # Only activate if not already active
 			is_active = true
 			line2d.visible = true
+			
+			# Update beam length before animation
+			if Laser.is_colliding():
+				var collision_point = Laser.get_collision_point()
+				beam_length = Laser.global_position.distance_to(collision_point)
+			else:
+				beam_length = 1000
+				
 			tween = get_tree().create_tween()
 			tween.tween_method(Callable(self, "update_laser"), 0.0, 1.0, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)
+			
 	elif Input.is_action_just_released("ui_shoot"):
 		if is_active:  # Only deactivate if currently active
 			is_active = false
 			tween = get_tree().create_tween()
 			tween.tween_method(Callable(self, "update_laser"), 1.0, 0.0, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 			
+	# Continuous updates while laser is active
 	if is_active and Player:
 		Laser.global_position = Player.global_position
 		Laser.force_raycast_update()
@@ -42,5 +52,7 @@ func _physics_process(delta: float) -> void:
 		if Laser.is_colliding():
 			var collision_point = Laser.get_collision_point()
 			beam_length = Laser.global_position.distance_to(collision_point)
-		#else:
-			#beam_length = RAY_LENGTH
+			line2d.points[1] = Vector2(beam_length, 0)  # Update end point in real-time
+		else:
+			beam_length = 1000
+			line2d.points[1] = Vector2(beam_length, 0)
