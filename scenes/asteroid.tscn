@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cmblaixuthfx0"]
 
-[ext_resource type="Script" path="res://scenes/asteroid.gd" id="1_f6ivw"]
+[ext_resource type="Script" uid="uid://tiotp0j6v80v" path="res://scenes/asteroid.gd" id="1_f6ivw"]
 [ext_resource type="Texture2D" uid="uid://bkawre6xjy4g2" path="res://assets/mine node1.png" id="2_5g240"]
 [ext_resource type="Texture2D" uid="uid://d1b4qv1xxyn2n" path="res://assets/mine node2.png" id="3_c4knm"]
 [ext_resource type="Texture2D" uid="uid://brlvt14no5ewv" path="res://assets/mine node3.png" id="4_io66y"]

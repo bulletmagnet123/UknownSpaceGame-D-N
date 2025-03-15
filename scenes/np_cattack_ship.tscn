@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3cqpq8m5cs78"]
+
+[ext_resource type="Texture2D" uid="uid://c75ppy4akomq2" path="res://assets/protoship.png" id="1_ffjbs"]
+
+[node name="NPCattackShip" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_ffjbs")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-5, -80, 109, 64, -122, 65)

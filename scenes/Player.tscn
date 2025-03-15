@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://rcr6x86bm54j"]
 
-[ext_resource type="Script" path="res://scenes/playerController.gd" id="1_s3i2x"]
+[ext_resource type="Script" uid="uid://du78s5qcn6of2" path="res://scenes/playerController.gd" id="1_s3i2x"]
 [ext_resource type="Texture2D" uid="uid://dythikpl7ye2m" path="res://assets/protoship mk ii.png" id="2_rhehs"]
 [ext_resource type="PackedScene" uid="uid://8on4o3fc70r7" path="res://scenes/Laser.tscn" id="3_cdbg3"]
 
