@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://8on4o3fc70r7"]
+
+[ext_resource type="Script" uid="uid://jjjglup7rnks" path="res://scenes/laser.gd" id="1_2d36p"]
+
+[sub_resource type="Environment" id="Environment_0x8s3"]
+resource_local_to_scene = true
+background_mode = 3
+background_color = Color(0.322686, 0.52718, 0.991591, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0, 0, 0.647059, 1)
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 0
+
+[node name="LaserNode" type="Node2D"]
+script = ExtResource("1_2d36p")
+
+[node name="Laser" type="RayCast2D" parent="."]
+target_position = Vector2(1000, 0)
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0.710144, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0, 0.537255, 1, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Line2D"]
+environment = SubResource("Environment_0x8s3")

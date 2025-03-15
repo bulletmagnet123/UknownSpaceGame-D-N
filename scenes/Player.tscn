@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://rcr6x86bm54j"]
+
+[ext_resource type="Script" uid="uid://du78s5qcn6of2" path="res://scenes/playerController.gd" id="1_s3i2x"]
+[ext_resource type="Texture2D" uid="uid://dythikpl7ye2m" path="res://assets/protoship mk ii.png" id="2_rhehs"]
+[ext_resource type="PackedScene" uid="uid://8on4o3fc70r7" path="res://scenes/Laser.tscn" id="3_cdbg3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvuq3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7qqas"]
+radius = 80.0
+height = 220.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-197, -31)
+script = ExtResource("1_s3i2x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nvuq3")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+rotation = 1.5708
+texture = ExtResource("2_rhehs")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7qqas")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LaserNode" parent="." instance=ExtResource("3_cdbg3")]
+position = Vector2(-6, 0)
+
+[node name="LaserNode2" parent="." instance=ExtResource("3_cdbg3")]
+position = Vector2(-39, 51)
+
+[node name="LaserNode3" parent="." instance=ExtResource("3_cdbg3")]
+position = Vector2(-33, -51)
