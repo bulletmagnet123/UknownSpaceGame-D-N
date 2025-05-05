@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cmblaixuthfx0"]
 
-[ext_resource type="Script" uid="uid://tiotp0j6v80v" path="res://scenes/asteroid.gd" id="1_f6ivw"]
+[ext_resource type="Script" uid="uid://b5acc01k4bcnv" path="res://scenes/Asteroid.cs" id="1_f6ivw"]
 [ext_resource type="Texture2D" uid="uid://bkawre6xjy4g2" path="res://assets/mine node1.png" id="2_5g240"]
 [ext_resource type="Texture2D" uid="uid://d1b4qv1xxyn2n" path="res://assets/mine node2.png" id="3_c4knm"]
 [ext_resource type="Texture2D" uid="uid://brlvt14no5ewv" path="res://assets/mine node3.png" id="4_io66y"]
@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("14_lxotc")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 20.0
 }]
@@ -70,8 +70,6 @@ script = ExtResource("1_f6ivw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tsp6k")
-autoplay = "default"
-frame_progress = 0.270421
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n8ula")
