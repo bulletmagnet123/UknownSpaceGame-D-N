@@ -11,7 +11,7 @@ public partial class PlayerController : CharacterBody2D
 
 	public override void _Ready()
 	{
-
+		AddToGroup("Player");
 	}
 
 	public override void _PhysicsProcess(double delta)
