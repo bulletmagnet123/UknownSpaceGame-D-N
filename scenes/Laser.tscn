@@ -13,8 +13,8 @@ glow_normalized = true
 glow_blend_mode = 0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7lu7"]
-radius = 25.289856
-height = 799.8792
+radius = 18.548187
+height = 686.46155
 
 [node name="LaserNode" type="Node2D" unique_id=675655760]
 script = ExtResource("1_rx3qg")
@@ -25,13 +25,13 @@ top_level = true
 target_position = Vector2(1000, 0)
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1171364301]
-position = Vector2(0.710144, 0)
-points = PackedVector2Array(0, 0, 0, 0)
+scale = Vector2(0.9838505, 1.1304348)
+points = PackedVector2Array(-317.12137, 1.7692307, 0, -0.88461536, 326.2691, -1.7692307)
 default_color = Color(0, 0.537255, 1, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Line2D" unique_id=618959737]
 environment = SubResource("Environment_0x8s3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D" unique_id=2034215868]
-rotation = 1.5565989
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_s7lu7")

@@ -14,7 +14,6 @@ points = PackedVector2Array(20, 20, 68, 1, -69, -64, -69, 68)
 script = SubResource("CSharpScript_mdl7e")
 
 [node name="Player" type="CharacterBody2D" unique_id=295589709]
-position = Vector2(-197, -31)
 script = ExtResource("1_qhqgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880137019]
@@ -25,7 +24,6 @@ rotation = 1.5708
 texture = ExtResource("2_rhehs")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=1052258047]
-position = Vector2(-3, -2)
 shape = SubResource("ConvexPolygonShape2D_mdl7e")
 debug_color = Color(0.97979075, 0, 0.38901752, 0.41960785)
 script = ExtResource("3_mdl7e")
@@ -33,10 +31,11 @@ script = ExtResource("3_mdl7e")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=393688274]
 
 [node name="LaserNode" parent="." unique_id=446752122 instance=ExtResource("3_cdbg3")]
-position = Vector2(470, -5)
+position = Vector2(0, 0)
+rotation = 6.2831855
 
 [node name="LaserNode2" parent="." unique_id=271281836 instance=ExtResource("3_cdbg3")]
-position = Vector2(324, 68)
+position = Vector2(-86, -82)
 
 [node name="LaserNode3" parent="." unique_id=1418200620 instance=ExtResource("3_cdbg3")]
-position = Vector2(338, -87)
+position = Vector2(-85, 64)
