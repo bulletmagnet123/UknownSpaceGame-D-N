@@ -1,10 +1,10 @@
-using Godot;
 using System;
+using Godot;
 
-public partial class Asteroid : CharacterBody2D
+public partial class Asteroid : RigidBody2D
 {
-	[Export] private float _minSpeed = 150.0f;
-	[Export] private float _maxSpeed = 250.0f;
+	[Export] private float _minSpeed = 0.0f;
+	[Export] private float _maxSpeed = 0.0f;
 	[Export] private float _minSpinSpeed = 0.5f;
 	[Export] private float _maxSpinSpeed = 2.0f;
 	[Export] private int _damage = 10;
@@ -18,34 +18,14 @@ public partial class Asteroid : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Rotation += _angularVelocity * (float)delta;
-
-		HandleCollisions();
-		
-		MoveAndSlide();
 	}
 
-	private void HandleCollisions()
-	{
-		// Check for collisions
-		for (int i = 0; i < GetSlideCollisionCount(); i++)
-		{
-			KinematicCollision2D collision = GetSlideCollision(i);
-			Node collider = collision.GetCollider() as Node;
-			
-			// Check if we collided with the player
-			if (collider != null && collider.IsInGroup("Player"))
-			{
-				// Apply additional spin based on collisionds
-				ApplyCollisionSpin(collision);
-				
-				// If you want to damage the player, you can do it here
-				// For example: collider.Call("TakeDamage", _damage);
-			}
-		}
-	}
+	
 	
 	public override void _Ready()
 	{
+		GravityScale = 0.0f;
+		var Velocity = Vector2.Zero;
 		_rng.Randomize();
 		float scaleFactor = _rng.RandfRange(0.5f, 2.0f) * _size;
 		Scale = new Vector2(scaleFactor, scaleFactor);
@@ -69,18 +49,7 @@ public partial class Asteroid : CharacterBody2D
 		QueueFree();
 	}
 	
-	private void ApplyCollisionSpin(KinematicCollision2D collision)
-	{
-		// Get collision normal
-		Vector2 normal = collision.GetNormal();
-		
-		// Calculate spin direction based on collision normal
-		// This creates a more realistic spin based on where the asteroid was hit
-		float spinDirection = normal.Cross(Vector2.Right);
-		
-		// Apply a random spin impulse in the calculated direction
-		_angularVelocity += spinDirection * _rng.RandfRange(0.5f, 1.0f) * _collisionSpinImpulse;
-	}
+	public int Damage => _damage;
 
 	public void TakeDamage(int amount)
 	{
@@ -91,5 +60,4 @@ public partial class Asteroid : CharacterBody2D
 		}
 	}
 	
-	public int Damage => _damage;
 }
