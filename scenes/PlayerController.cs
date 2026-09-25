@@ -29,6 +29,16 @@ public partial class PlayerController : CharacterBody2D
 		
 		Velocity = direction * Speed;
 		MoveAndSlide();
+
+		for (int collisionIndex = 0; collisionIndex < GetSlideCollisionCount(); collisionIndex++)
+		{
+			var collision = GetSlideCollision(collisionIndex);
+			if (collision.GetCollider() is Asteroid asteroid)
+			{
+				Vector2 pushDirection = -collision.GetNormal();
+				asteroid.ApplyCentralImpulse(pushDirection * Speed * 0.25f);
+			}
+		}
 		
 		if (Input.IsActionPressed("RIGHT"))
 		{
@@ -65,7 +75,6 @@ public partial class PlayerController : CharacterBody2D
 		if (body is Asteroid asteroid)
 		{
 			Health -= asteroid.Damage;
-			asteroid.QueueFree();
 		}
 	}
 }

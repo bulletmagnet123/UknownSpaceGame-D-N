@@ -10,9 +10,15 @@ radius = 85.2878
 script = ExtResource("1_f6ivw")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1530230636]
+physics_interpolation_mode = 1
+auto_translate_mode = 1
+disable_mode = 2
+input_pickable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1289538207]
 texture = ExtResource("14_lxotc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1599361770]
+physics_interpolation_mode = 1
+auto_translate_mode = 1
 shape = SubResource("CircleShape2D_n8ula")
