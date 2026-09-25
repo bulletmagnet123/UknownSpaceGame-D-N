@@ -1,36 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://rcr6x86bm54j"]
+[gd_scene format=3 uid="uid://rcr6x86bm54j"]
 
 [ext_resource type="Script" uid="uid://cfoxtkcbw2wn5" path="res://scenes/PlayerController.cs" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://dythikpl7ye2m" path="res://assets/protoship mk ii.png" id="2_rhehs"]
 [ext_resource type="PackedScene" uid="uid://8on4o3fc70r7" path="res://scenes/Laser.tscn" id="3_cdbg3"]
+[ext_resource type="Script" uid="uid://d0ijpd55rxn0n" path="res://scenes/Collider.cs" id="3_mdl7e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvuq3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7qqas"]
-radius = 80.0
-height = 220.0
+[sub_resource type="CSharpScript" id="CSharpScript_mdl7e"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_mdl7e"]
+points = PackedVector2Array(20, 20, 68, 1, -69, -64, -69, 68)
+script = SubResource("CSharpScript_mdl7e")
+
+[node name="Player" type="CharacterBody2D" unique_id=295589709]
 position = Vector2(-197, -31)
 script = ExtResource("1_qhqgy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880137019]
 sprite_frames = SubResource("SpriteFrames_nvuq3")
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D" unique_id=1776292420]
 rotation = 1.5708
 texture = ExtResource("2_rhehs")
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_7qqas")
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1052258047]
+position = Vector2(-3, -2)
+shape = SubResource("ConvexPolygonShape2D_mdl7e")
+debug_color = Color(0.97979075, 0, 0.38901752, 0.41960785)
+script = ExtResource("3_mdl7e")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=393688274]
 
-[node name="LaserNode" parent="." instance=ExtResource("3_cdbg3")]
-position = Vector2(-6, 0)
+[node name="LaserNode" parent="." unique_id=446752122 instance=ExtResource("3_cdbg3")]
+position = Vector2(470, -5)
 
-[node name="LaserNode2" parent="." instance=ExtResource("3_cdbg3")]
-position = Vector2(-39, 51)
+[node name="LaserNode2" parent="." unique_id=271281836 instance=ExtResource("3_cdbg3")]
+position = Vector2(324, 68)
 
-[node name="LaserNode3" parent="." instance=ExtResource("3_cdbg3")]
-position = Vector2(-33, -51)
+[node name="LaserNode3" parent="." unique_id=1418200620 instance=ExtResource("3_cdbg3")]
+position = Vector2(338, -87)

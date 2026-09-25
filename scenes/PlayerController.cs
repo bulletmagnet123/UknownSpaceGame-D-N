@@ -6,12 +6,23 @@ public partial class PlayerController : CharacterBody2D
 	[Export]
 	public float Speed { get; set; } = 500;
 
-	[Export]
-	public int Health { get; set; } = 100;
+	
 
+	[Export]
+	public int Health { get; set; } = 4;
+	public Line2D line2d;
 	public override void _Ready()
 	{
+		line2d = GetNode<Line2D>("Line2D");
 		AddToGroup("Player");
+
+	}
+
+	// Removed the previous _Ready() method since it's now combined with the line2d initialization.
+	
+	public void Die()
+	{
+		QueueFree();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -37,6 +48,12 @@ public partial class PlayerController : CharacterBody2D
 			{
 				Vector2 pushDirection = -collision.GetNormal();
 				asteroid.ApplyCentralImpulse(pushDirection * Speed * 0.25f);
+				Health -= asteroid.Damage;
+				if (Health <= 0)
+				{
+					Die();
+					return;
+				}
 			}
 		}
 		
@@ -70,11 +87,4 @@ public partial class PlayerController : CharacterBody2D
 		
 	}
 
-	private void OnCollision(Node2D body)
-	{
-		if (body is Asteroid asteroid)
-		{
-			Health -= asteroid.Damage;
-		}
-	}
 }

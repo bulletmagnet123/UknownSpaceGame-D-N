@@ -22,23 +22,6 @@ public partial class Asteroid : RigidBody2D
 		_velocity = LinearVelocity;
 	}
 
-	void Collider(RigidBody2D body, CollisionShape2D collider)
-	{
-		_velocity = Vector2.Zero;
-		
-		collider.Disabled = false;
-		CollisionLayer = 1;
-		CollisionMask = 1;
-		body.LinearVelocity = Vector2.Zero;
-		body.AngularVelocity = 0.0f;
-		body.ApplyCentralImpulse(Vector2.Zero);
-
-		_health = 3;
-		_angularVelocity = 0.0f;
-	}
-
-
-
 	public override void _Ready()
 	{
 
@@ -76,7 +59,5 @@ public partial class Asteroid : RigidBody2D
 			Explode();
 		}
 	}
-
-	
 	
 }

@@ -6,13 +6,14 @@ public partial class Laser : Node2D
 	private Tween tween;
 	private float beamLength = 1000;
 	private bool isActive = false;
-	private bool shoot = false;
+	public bool shoot = false;
+	[Export] private int damage = 1;
 	
 	[Export]
-	private Line2D line2d;
+	public Line2D line2d;
 	
 	[Export]
-	private RayCast2D laser;
+	public RayCast2D laser;
 	
 	private CharacterBody2D player;
 	
@@ -93,6 +94,11 @@ public partial class Laser : Node2D
 			
 			if (laser.IsColliding())
 			{
+				Asteroid asteroid = laser.GetCollider() as Asteroid;
+				if (asteroid != null)
+				{
+					asteroid.TakeDamage(damage);
+				}
 				Vector2 collisionPoint = laser.GetCollisionPoint();
 				beamLength = laser.GlobalPosition.DistanceTo(collisionPoint);
 				line2d.SetPointPosition(1, new Vector2(beamLength, 0));  // Update end point in real-time
