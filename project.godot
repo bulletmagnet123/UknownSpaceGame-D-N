@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="BulletAndizendaleGameProject"
+config/name="BulletmagnetAndIzendaleGameProject"
 run/main_scene="uid://c36wkmpy5d33p"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"

@@ -9,7 +9,7 @@ public partial class PlayerController : CharacterBody2D
 	
 
 	[Export]
-	public int Health { get; set; } = 4;
+	public int Health { get; set; } = 10;
 
 	public override void _Ready()
 	{

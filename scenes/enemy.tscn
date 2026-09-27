@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dr5ou0jqtxa8p"]
+
+[ext_resource type="Script" uid="uid://l8mjfa6lxi8p" path="res://scenes/EnemyScript.cs" id="1_5uy6h"]
+[ext_resource type="Texture2D" uid="uid://c75ppy4akomq2" path="res://assets/protoship.png" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://8on4o3fc70r7" path="res://scenes/Laser.tscn" id="2_4ra3w"]
+[ext_resource type="Script" uid="uid://djg5gdjvh7s1x" path="res://scenes/EnemyLaser.cs" id="3_4ra3w"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2yko0"]
+points = PackedVector2Array(-64, -108, 66, -13, -55, 97)
+
+[node name="Enemy" type="Node2D" unique_id=445800532]
+position = Vector2(0, 219)
+script = ExtResource("1_5uy6h")
+
+[node name="EnemyBody" type="CharacterBody2D" parent="." unique_id=1725032871]
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyBody" unique_id=418809610]
+position = Vector2(0, -3)
+rotation = 1.5707964
+texture = ExtResource("1_md0e3")
+
+[node name="EnemyCollider" type="CollisionShape2D" parent="EnemyBody" unique_id=928441703]
+show_behind_parent = true
+position = Vector2(0, 1)
+shape = SubResource("ConvexPolygonShape2D_2yko0")
+
+[node name="EnemyLasser" parent="." unique_id=675655760 instance=ExtResource("2_4ra3w")]
+script = ExtResource("3_4ra3w")
+_damage = 1

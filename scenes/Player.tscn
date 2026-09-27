@@ -31,11 +31,11 @@ script = ExtResource("3_mdl7e")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=393688274]
 
 [node name="LaserNode" parent="." unique_id=446752122 instance=ExtResource("3_cdbg3")]
-position = Vector2(0, 0)
+position = Vector2(34, 1)
 rotation = 6.2831855
 
 [node name="LaserNode2" parent="." unique_id=271281836 instance=ExtResource("3_cdbg3")]
-position = Vector2(-86, -82)
+position = Vector2(-75, -67)
 
 [node name="LaserNode3" parent="." unique_id=1418200620 instance=ExtResource("3_cdbg3")]
-position = Vector2(-85, 64)
+position = Vector2(-64, 69)

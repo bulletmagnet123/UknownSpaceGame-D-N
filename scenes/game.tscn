@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://2d6eioytqec7" path="res://scenes/background_mk_2.tscn" id="1_pt3a0"]
 [ext_resource type="PackedScene" uid="uid://rcr6x86bm54j" path="res://scenes/Player.tscn" id="2_rm24y"]
 [ext_resource type="PackedScene" uid="uid://cmblaixuthfx0" path="res://scenes/asteroid.tscn" id="3_jvhca"]
+[ext_resource type="PackedScene" uid="uid://dr5ou0jqtxa8p" path="res://scenes/enemy.tscn" id="5_iywne"]
 
 [node name="Game" type="Node2D" unique_id=2021555484]
 script = ExtResource("1_hysjs")
@@ -14,3 +15,6 @@ script = ExtResource("1_hysjs")
 
 [node name="Asteroid" parent="." unique_id=1166181638 instance=ExtResource("3_jvhca")]
 position = Vector2(372, -132)
+
+[node name="Enemy" parent="." unique_id=445800532 instance=ExtResource("5_iywne")]
+position = Vector2(206, 216)
