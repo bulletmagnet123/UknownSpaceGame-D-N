@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices.JavaScript;
 using Godot;
 
 public partial class Asteroid : RigidBody2D
@@ -7,14 +8,24 @@ public partial class Asteroid : RigidBody2D
 	[Export] private float _maxSpeed = 4.0f;
 	[Export] private float _minSpinSpeed = 0.5f;
 	[Export] private float _maxSpinSpeed = 5.0f;
-	[Export] private int _damage = 10;
+	[Export] private int _damage = 1;
 	[Export] private float _collisionSpinImpulse = 2.0f;
 	private float _size = 1.0f;
-	private int _health = 3;
+	[Export] public int Health = 3;
 	private float _angularVelocity = 0.0f;
 	public Vector2 _velocity = Godot.Vector2.Zero;
+	[Export] CollisionShape2D _collision;
 
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
+	
+	public void TakeDamage(int damage)
+	{
+		Health -= damage;
+		if (Health <= 0)
+		{
+			Explode();
+		}
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -24,7 +35,6 @@ public partial class Asteroid : RigidBody2D
 
 	public override void _Ready()
 	{
-
 		GravityScale = 0.0f;
 		Vector2 velocity = new Vector2((float)GD.RandRange(-1.0f, 2.0f), (float)GD.RandRange(-1.0f, 2.0f)).Normalized();
 		_rng.Randomize();
@@ -34,30 +44,17 @@ public partial class Asteroid : RigidBody2D
 		//sprite.Rotation = (float)GD.RandRange(0, 360);
 		var rand = (float)GD.RandRange(0.8f, 4.0f);
 		sprite.Scale = new Vector2(rand, rand);
-		
-		// Set random spin direction and speed
-		int direction = _rng.RandiRange(0, 1) == 0 ? -1 : 1;  // Random direction (left or right)
-		_angularVelocity = _rng.RandfRange(_minSpinSpeed, _maxSpinSpeed) * direction;  // Random speed
-		
+		CollisionShape2D collisionShape = _collision;
+		collisionShape.Scale = new Vector2(scaleFactor, scaleFactor);
 		velocity *= _rng.RandfRange(_minSpeed, _maxSpeed);
 		LinearVelocity = velocity;
 		AngularVelocity = _angularVelocity;
+		_angularVelocity = _rng.RandfRange(_minSpinSpeed, _maxSpinSpeed);
 	}
 	
 	public void Explode()
 	{
-		QueueFree();
+		Asteroid asteroid = new Asteroid();
+		asteroid.QueueFree();
 	}
-	
-	public int Damage => _damage;
-
-	public void TakeDamage(int amount)
-	{
-		_health -= amount;
-		if (_health <= 0)
-		{
-			Explode();
-		}
-	}
-	
 }

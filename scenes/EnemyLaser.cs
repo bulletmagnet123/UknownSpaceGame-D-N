@@ -1,79 +1,103 @@
 using Godot;
 
+namespace BulletmagnetAndIzendaleGameProject.scenes;
+
 public partial class EnemyLaser : Node2D
 {
-	[Export] private int _damage = 1;
-
-	private float _beamLength = 1000.0f;
-	private bool _isActive;
+	[Export] private float _beamTweenDuration = 0.18f;
 	private Line2D _line2D;
 	private RayCast2D _laser;
-	private CharacterBody2D _player;
-		
+	private Tween _beamTween;
+
+	[Export] public int Damage = 1;
+
 	public override void _Ready()
 	{
 		_line2D = GetNode<Line2D>("Line2D");
 		_laser = GetNode<RayCast2D>("Laser");
-		_player = GetParent() as CharacterBody2D;
-		_isActive = false;
-
+		_line2D.ClearPoints();
+		_line2D.AddPoint(Vector2.Zero);
+		_line2D.AddPoint(Vector2.Zero);
 		_line2D.Visible = false;
-		_line2D.SetPointPosition(0, Vector2.Zero);
-		_line2D.SetPointPosition(1, Vector2.Zero);
-
-		if (_player != null)
-		{
-			_laser.AddException(_player);
-		}
-		Tween tween = CreateTween();
 	}
-	public Tween tween
-	{
-		get;
-		private set;
-	}
-	
 
 	public override void _PhysicsProcess(double delta)
 	{
 		UpdateRaycast();
-
-		if (Input.IsActionPressed("ui_shoot"))
-		{
-			_isActive = true;
-			_line2D.Visible = true;
-			UpdateBeamLength();
-			_line2D.SetPointPosition(1, new Vector2(_beamLength, 0));
-
-			if (_laser.IsColliding() && _laser.GetCollider() is Asteroid asteroid)
-			{
-				asteroid.TakeDamage(_damage);
-			}
-		}
-		else if (_isActive)
-		{
-			_isActive = false;
-			_line2D.Visible = false;
-			_line2D.SetPointPosition(1, Vector2.Zero);
-		}
+		base._PhysicsProcess(delta);
 	}
 
 	private void UpdateRaycast()
 	{
-		_laser.GlobalPosition = GlobalPosition;
 		_laser.GlobalRotation = GlobalRotation;
 		_laser.ForceRaycastUpdate();
 	}
 
-	private void UpdateBeamLength()
+	private void StartBeamPulse()
+	{
+		UpdateRaycast();
+		Vector2 endPoint = _laser.IsColliding()
+			? _line2D.ToLocal(_laser.GetCollisionPoint())
+			: _line2D.ToLocal(_laser.ToGlobal(_laser.TargetPosition));
+
+		_line2D.Visible = true;
+		_line2D.SetPointPosition(1, Vector2.Zero);
+
+		_beamTween = CreateTween();
+		_beamTween.TweenMethod(
+			Callable.From<float>(progress => SetBeamProgress(progress, endPoint)),
+			0.0f,
+			1.0f,
+			_beamTweenDuration
+		).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		_beamTween.TweenCallback(Callable.From(DamageTarget));
+		_beamTween.TweenMethod(
+			Callable.From<float>(progress => SetBeamProgress(progress, endPoint)),
+			1.0f,
+			0.0f,
+			_beamTweenDuration
+		).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.In);
+		_beamTween.TweenCallback(Callable.From(HideBeam));
+	}
+
+	private void SetBeamProgress(float progress, Vector2 endPoint)
+	{
+		_line2D.SetPointPosition(1, endPoint * progress);
+	}
+
+	private void HideBeam()
+	{
+		_line2D.Visible = false;
+		_line2D.SetPointPosition(1, Vector2.Zero);
+		_beamTween = null;
+	}
+
+	private void DamageTarget()
 	{
 		if (_laser.IsColliding())
 		{
-			_beamLength = _laser.GlobalPosition.DistanceTo(_laser.GetCollisionPoint());
+			var collider = _laser.GetCollider();
+			if (collider is PlayerController player)
+			{
+				player.TakeDamage(Damage);
+			}
+			else if (collider is Asteroid hitAsteroid)
+			{
+				hitAsteroid.TakeDamage(Damage);
+			}
 		}
-		else
+	}
+
+	public void FireLaser(bool active)
+	{
+		if (!active)
 		{
-			_beamLength = 1000.0f;
+			return;
+		}
+
+		while (_beamTween == null || !_beamTween.IsRunning())
+		{
+			StartBeamPulse();
 		}
 	}
 }

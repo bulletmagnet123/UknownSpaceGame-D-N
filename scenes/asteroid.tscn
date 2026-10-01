@@ -18,7 +18,13 @@ input_pickable = true
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1289538207]
 texture = ExtResource("14_lxotc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1599361770]
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1599361770]
 physics_interpolation_mode = 1
 auto_translate_mode = 1
 shape = SubResource("CircleShape2D_n8ula")
+
+[node name="Obstacle" type="NavigationObstacle2D" parent="." unique_id=2083636182]
+physics_interpolation_mode = 1
+radius = 98.21
+vertices = PackedVector2Array(84, -77, 84, -77, -112, -79, -93, 97, 102, 104)
+affect_navigation_mesh = true

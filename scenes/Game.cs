@@ -22,10 +22,14 @@ public partial class Game : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Health <= 0)
+		Asteroid asteroid = new Asteroid();
+		if (asteroid.Health == 0)
 		{
 			SpawnAsteroid(GlobalPosition, AsteroidSize.SMALL);
+			asteroid = new Asteroid();
+			asteroid.Explode();
 		}
+		
 		
 		if (Input.IsActionJustPressed("ui_select"))  // Assuming "ui_select" is mapped to a key
 		{
@@ -49,11 +53,9 @@ public partial class Game : Node2D
 		if (size == AsteroidSize.LARGE)
 		{
 			SpawnAsteroid(pos, AsteroidSize.MEDIUM);
-			SpawnAsteroid(pos, AsteroidSize.MEDIUM);
 		}
 		else if (size == AsteroidSize.MEDIUM)
 		{
-			SpawnAsteroid(pos, AsteroidSize.SMALL);
 			SpawnAsteroid(pos, AsteroidSize.SMALL);
 		}
 	}

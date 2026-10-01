@@ -7,11 +7,8 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvuq3"]
 
-[sub_resource type="CSharpScript" id="CSharpScript_mdl7e"]
-
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_mdl7e"]
 points = PackedVector2Array(20, 20, 68, 1, -69, -64, -69, 68)
-script = SubResource("CSharpScript_mdl7e")
 
 [node name="Player" type="CharacterBody2D" unique_id=295589709]
 script = ExtResource("1_qhqgy")

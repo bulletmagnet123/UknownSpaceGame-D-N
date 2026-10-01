@@ -1,12 +1,16 @@
 using Godot;
 using System;
+using BulletmagnetAndIzendaleGameProject.scenes;
 
 public partial class PlayerController : CharacterBody2D
 {
 	[Export]
 	public float Speed { get; set; } = 500;
-
 	
+	[Export]
+	public Collider collider;
+
+	Asteroid asteroid;
 
 	[Export]
 	public int Health { get; set; } = 10;
@@ -14,6 +18,15 @@ public partial class PlayerController : CharacterBody2D
 	public override void _Ready()
 	{
 		AddToGroup("Player");
+	}
+
+	public void TakeDamage(int damage)
+	{
+		Health -= damage;
+		if (Health <= 0)
+		{
+			Die();
+		}
 	}
 	
 	public void Die()
@@ -26,8 +39,9 @@ public partial class PlayerController : CharacterBody2D
 		var speed = 500;
 		var velocity = Vector2.Zero;
 		var direction = new Vector2(
-		Input.GetActionStrength("RIGHT") - Input.GetActionStrength("LEFT"),
-		Input.GetActionStrength("DOWN") - Input.GetActionStrength("UP") );
+			Input.GetActionStrength("RIGHT") - Input.GetActionStrength("LEFT"),
+			Input.GetActionStrength("DOWN") - Input.GetActionStrength("UP")
+		);
 		
 		if (direction.Length() > 1.0f)
 		{
@@ -44,34 +58,35 @@ public partial class PlayerController : CharacterBody2D
 			{
 				Vector2 pushDirection = -collision.GetNormal();
 				asteroid.ApplyCentralImpulse(pushDirection * Speed * 0.25f);
-				Health -= asteroid.Damage;
+				Health -= asteroid.Health;
 				if (Health <= 0)
 				{
 					Die();
 					return;
 				}
 			}
+
+			if (collision.GetCollider() is EnemyLaser)
+			{
+				TakeDamage(1);
+			}
 		}
 		
 		if (Input.IsActionPressed("RIGHT"))
 		{
 			velocity.X += speed;
-			
 		}
 		if (Input.IsActionPressed("LEFT"))
 		{
 			velocity.X -= speed;
-			
 		}
 		if (Input.IsActionPressed("DOWN"))
 		{
 			velocity.Y += speed;
-			
 		}
 		if (Input.IsActionPressed("UP"))
 		{
 			velocity.Y -= speed;
-			
 		}
 		var mousePosition = GetGlobalMousePosition();
 		var directionToMouse = mousePosition - GlobalPosition;
@@ -80,7 +95,5 @@ public partial class PlayerController : CharacterBody2D
 		{
 			LookAt(mousePosition);
 		}
-		
 	}
-
 }

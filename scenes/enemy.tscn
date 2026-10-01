@@ -9,7 +9,7 @@
 points = PackedVector2Array(-64, -108, 66, -13, -55, 97)
 
 [node name="Enemy" type="Node2D" unique_id=445800532]
-position = Vector2(0, 219)
+position = Vector2(8, 8)
 script = ExtResource("1_5uy6h")
 
 [node name="EnemyBody" type="CharacterBody2D" parent="." unique_id=1725032871]
@@ -26,5 +26,7 @@ position = Vector2(0, 1)
 shape = SubResource("ConvexPolygonShape2D_2yko0")
 
 [node name="EnemyLasser" parent="." unique_id=675655760 instance=ExtResource("2_4ra3w")]
+position = Vector2(3, 1)
 script = ExtResource("3_4ra3w")
-_damage = 1
+_beamTweenDuration = 0.18
+Damage = 1
